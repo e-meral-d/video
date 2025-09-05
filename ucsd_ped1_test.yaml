@@ -1,0 +1,56 @@
+# Configuration for testing on UCSD Ped1 dataset
+dataset_path: "/path/to/ucsd_ped1"
+dataset_name: "ucsd"
+
+# Model parameters
+temporal_transformer_layers: 2
+temporal_heads: 8
+clip_length: 16
+stride: 8
+
+# Testing parameters
+batch_size: 1
+
+# CLIP parameters
+image_size: 336
+features_list: [6, 12, 18, 24]
+feature_map_layers: [0, 1, 2, 3]
+
+# Prompt parameters
+n_ctx: 12
+depth: 9
+t_n_ctx: 4
+
+# Semantic prompts for UCSD Ped1 dataset anomalies
+# Ped1 focuses more on crowd behavior and movement patterns
+semantic_prompts:
+  - "people walking in wrong direction"
+  - "unusual crowd movement patterns"
+  - "people moving against the flow"
+  - "irregular pedestrian behavior" 
+  - "abnormal walking speed"
+  - "people gathering in unusual areas"
+  - "erratic movement patterns"
+  - "people running or rushing"
+  - "crowd congestion and blocking"
+  - "people moving in circles or loops"
+  - "sudden direction changes"
+  - "people standing in walkways"
+
+# Evaluation settings
+checkpoint_path: "./checkpoints/shanghaitech/best_model.pth"
+results_dir: "./results/ucsd_ped1/"
+save_visualizations: false
+
+# Post-processing
+gaussian_sigma: 4
+score_aggregation: "max"  # or "mean"
+
+# Dataset specific settings for Ped1
+# Ped1 has different characteristics compared to Ped2:
+# - More focus on crowd dynamics
+# - Less object-based anomalies
+# - More movement pattern anomalies
+dataset_specific:
+  focus: "crowd_behavior"
+  anomaly_types: ["movement_patterns", "crowd_dynamics", "directional_anomalies"]

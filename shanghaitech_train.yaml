@@ -1,0 +1,41 @@
+# Configuration for training on ShanghaiTech dataset
+dataset_path: "data/shanghaitech"
+dataset_name: "shanghaitech"
+
+# Model parameters
+temporal_transformer_layers: 1  # 减少temporal layers以节省内存
+temporal_heads: 4  # 减少attention heads以节省内存
+clip_length: 16
+stride: 8
+
+# Training parameters
+batch_size: 2  # 减少batch size以节省内存
+learning_rate: 0.0001
+epochs: 20
+warmup_epochs: 2
+
+# CLIP parameters
+image_size: 336
+features_list: [6, 12, 18, 24]
+feature_map_layers: [0, 1, 2, 3]
+
+# Prompt parameters
+n_ctx: 12
+depth: 9
+t_n_ctx: 4
+
+# Generic prompts for training
+generic_prompts:
+  normal: "a normal scene"
+  abnormal: "an abnormal event"
+
+# Training settings
+print_freq: 50
+save_freq: 5
+checkpoint_dir: "./checkpoints/shanghaitech/"
+
+# Loss weights
+focal_weight: 1.0
+dice_weight: 1.0
+image_loss_weight: 0.1
+temporal_smooth_weight: 0.01
